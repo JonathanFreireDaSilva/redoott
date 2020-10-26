@@ -9,19 +9,21 @@ import (
 )
 
 /*InsertRegistry es la parada final con la DB para insertar los datos del usuario*/
-func InsertRegistry(u models.User) (string, bool, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+func InsertRegistry(user models.User) (string, bool, error) {
+
+	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second) //le decimos al context.TODO que teniamos que espere 15 segundos
 	defer cancel()
 
 	db := MongoCN.Database("redoott")
-	col := db.Collection("users")
-	u.Password, _ = EncryptPassword(u.Password)
+	userCollection := db.Collection("users")
 
-	result, err := col.InsertOne(ctx, u)
+	user.Password, _ = EncryptPassword(user.Password)
+
+	res, err := userCollection.InsertOne(ctx, user)
 	if err != nil {
 		return "", false, err
 	}
 
-	ObjID, _ := result.InsertedID.(primitive.ObjectID)
+	ObjID, _ := res.InsertedID.(primitive.ObjectID) // manera de obtengo el id
 	return ObjID.String(), true, nil
 }
