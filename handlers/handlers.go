@@ -14,9 +14,10 @@ import (
 /*Manejadores seteo el puerto, pongo a escuchar al servidor*/
 func Manejadores() {
 
-	router := mux.NewRouter()
+	router := mux.NewRouter() //captura el http y le da manejo al response y al request que viene en el llamado de la api
 
 	router.HandleFunc("/register", middleware.CheckDB(routers.Register)).Methods("POST")
+	router.HandleFunc("/login", middleware.CheckDB(routers.Login)).Methods("POST")
 
 	PORT := os.Getenv("PORT") // me fijo si tengo una variable de entorno con el nombre port definida
 	if PORT == "" {

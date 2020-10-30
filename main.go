@@ -9,7 +9,7 @@ import (
 
 func main() {
 	if db.CheckConnection() == false {
-		log.Fatal("SIN CONEXION ALA DB ")
+		log.Fatal("SIN CONEXION A LA DB ")
 		return
 	}
 	handlers.Manejadores()

@@ -10,20 +10,23 @@ import (
 
 /*CheckUserExist recibe un emal de parametro y chequea si esta en la abse de datos*/
 func CheckUserExist(email string) (models.User, bool, string) {
+
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
 	db := MongoCN.Database("redoott")
-	col := db.Collection("users")
+	userCollection := db.Collection("users")
 
 	condicion := bson.M{"email": email}
 
-	var result models.User
+	var user models.User
 
-	err := col.FindOne(ctx, condicion).Decode(&result)
-	ID := result.ID.Hex()
+	err := userCollection.FindOne(ctx, condicion).Decode(&user) //si no encuentra nada guarda en error y si encuentra algoo lo guarda en user
+	ID := user.ID.Hex()
+
 	if err != nil {
-		return result, false, ID
+		return user, false, ID
 	}
-	return result, true, ID
+
+	return user, true, ID
 }
