@@ -10,7 +10,7 @@ import (
 	"go.mongo.org/mongo-driver/bson/primitive"
 )
 
-/**SeachProfile busca un perfil en la base de daos*/
+/*SearchProfile busca un perfil en la base de daos*/
 func SearchProfile(ID string) (models.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
