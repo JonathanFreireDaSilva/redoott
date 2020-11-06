@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"enconding/json"
+	"encoding/json"
 	"net/http"
 
 	"github.com/JonathanFreireDaSilva/redoot/db"
