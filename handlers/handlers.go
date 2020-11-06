@@ -18,6 +18,7 @@ func Manejadores() {
 
 	router.HandleFunc("/register", middleware.CheckDB(routers.Register)).Methods("POST")
 	router.HandleFunc("/login", middleware.CheckDB(routers.Login)).Methods("POST")
+	router.HandleFunc("/viewProfile", middleware.CheckDB(middleware.ValidateJWT(routers.ViewProfile))).Methods("POST")
 
 	PORT := os.Getenv("PORT") // me fijo si tengo una variable de entorno con el nombre port definida
 	if PORT == "" {
