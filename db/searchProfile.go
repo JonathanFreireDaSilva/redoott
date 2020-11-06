@@ -13,12 +13,13 @@ import (
 /**SeachProfile busca un perfil en la base de daos*/
 func SearchProfile(ID string) (models.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
+	defer cancel()
 	db := MongoCN.Database("redoot")
-	collUsers := db.Colection("users")
+	collUsers := db.Collection("users")
 
 	var profile models.User
 
-	objID, _ := primitive.ObjectIDFromHEx(ID)
+	objID, _ := primitive.ObjectIDFromHex(ID)
 
 	condition := bson.M{
 		"_id": objID,
