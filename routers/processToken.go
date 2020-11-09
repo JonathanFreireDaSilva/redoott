@@ -21,7 +21,9 @@ func ProcessToken(myToken string) (*models.Claim, bool, string, error) {
 	claims := &models.Claim{}
 
 	splitToken := strings.Split(myToken, "Bearer")
-	if len(myToken) != 2 {
+
+	if len(splitToken) != 2 {
+
 		return claims, false, string(""), errors.New("formato de token invalido")
 	}
 

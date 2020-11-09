@@ -6,15 +6,15 @@ import (
 	"time"
 
 	"github.com/JonathanFreireDaSilva/redoott/models"
-	"go.mongo.org/mongo-driver/bson"
-	"go.mongo.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 /*SearchProfile busca un perfil en la base de daos*/
 func SearchProfile(ID string) (models.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
-	db := MongoCN.Database("redoot")
+	db := MongoCN.Database("redoott")
 	collUsers := db.Collection("users")
 
 	var profile models.User

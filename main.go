@@ -7,6 +7,7 @@ import (
 	"github.com/JonathanFreireDaSilva/redoott/handlers"
 )
 
+//fmt.Println(splitToken)
 func main() {
 	if db.CheckConnection() == false {
 		log.Fatal("SIN CONEXION A LA DB ")

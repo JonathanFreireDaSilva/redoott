@@ -4,10 +4,12 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/JonathanFreireDaSilva/redoot/db"
+	"github.com/JonathanFreireDaSilva/redoott/db"
 )
 
+/*ViewProfile permite extraer los valores del perfil*/
 func ViewProfile(w http.ResponseWriter, r *http.Request) {
+
 	ID := r.URL.Query().Get("id")
 	if len(ID) < 1 {
 		http.Error(w, "Debe enviar el parametro ID", http.StatusBadRequest)
@@ -16,11 +18,12 @@ func ViewProfile(w http.ResponseWriter, r *http.Request) {
 
 	profile, err := db.SearchProfile(ID)
 	if err != nil {
-		http.Error(w, "Ocurrio un error al ntentar buscar el registro"+err.Error()+400)
+		http.Error(w, "Ocurrio un error al ntentar buscar el registro"+err.Error(), 400)
 		return
+
 	}
 
-	w.Header().Set("context-type", "application/json")
+	w.Header().Set("Context-Type", "application/json")
 
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(profile)

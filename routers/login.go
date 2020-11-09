@@ -30,6 +30,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	document, exist := db.TryLogin(user.Email, user.Password)
 	if exist == false {
 		http.Error(w, "Usuario y/o Contraseña invalidos", 400)
+		return
 
 	}
 
